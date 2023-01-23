@@ -14,16 +14,14 @@ refs.searchBox.addEventListener(
   'input',
   debounce(event => {
     const value = event.target.value.trim();
+    clearCountriesData();
 
     if (value === '') {
-      clearCountriesData();
       return;
     }
 
     fetchCountries(value)
       .then(countries => {
-        clearCountriesData();
-
         if (countries.length == 0) {
           Notiflix.Notify.failure('Oops, there is no country with that name');
         } else if (countries.length >= 10) {
